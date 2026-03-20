@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Mini Calculator</h2>
+
+<input id="screen" placeholder="0">
+
+<br><br>
+
+<button onclick="insertValue('1')">1</button>
+<button onclick="insertValue('2')">2</button>
+<button onclick="insertValue('3')">3</button>
+<button onclick="insertValue('+')">+</button>
+<br>
+
+<button onclick="insertValue('4')">4</button>
+<button onclick="insertValue('5')">5</button>
+<button onclick="insertValue('6')">6</button>
+<button onclick="insertValue('-')">-</button>
+<br>
+
+<button onclick="insertValue('7')">7</button>
+<button onclick="insertValue('8')">8</button>
+<button onclick="insertValue('9')">9</button>
+<button onclick="insertValue('*')">*</button>
+<br>
+
+<button onclick="insertValue('.')">.</button>
+<button onclick="insertValue('0')">0</button>
+<button onclick="calculateResult()">=</button>
+<button onclick="insertValue('/')">/</button>
+<br>
+
+<button onclick="clearAll()">Clear</button>
+
+<script>
+
+let inputBox = document.getElementById("screen");
+
+function insertValue(val){
+  inputBox.value = inputBox.value + val;
+}
+
+function calculateResult(){
+  try {
+    let output = eval(inputBox.value);
+    inputBox.value = output;
+  } catch {
+    inputBox.value = "Error";
+  }
+}
+
+function clearAll(){
+  inputBox.value = "";
+}
+
+</script>
+
+</body>
+</html>

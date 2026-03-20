@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RGB Generator</title>
+</head>
+
+<body>
+
+<h2>RGB Color Controller</h2>
+
+Red <input type="range" min="0" max="255" id="redRange"><br><br>
+Green <input type="range" min="0" max="255" id="greenRange"><br><br>
+Blue <input type="range" min="0" max="255" id="blueRange"><br><br>
+
+<p id="colorText">rgb(0,0,0)</p>
+
+<script>
+
+let redInput = document.getElementById("redRange");
+let greenInput = document.getElementById("greenRange");
+let blueInput = document.getElementById("blueRange");
+
+let textDisplay = document.getElementById("colorText");
+
+function changeColor(){
+
+  let rVal = redInput.value;
+  let gVal = greenInput.value;
+  let bVal = blueInput.value;
+
+  let finalColor = "rgb(" + rVal + "," + gVal + "," + bVal + ")";
+
+  document.body.style.backgroundColor = finalColor;
+
+  textDisplay.innerHTML = finalColor;
+}
+redInput.addEventListener("input", changeColor);
+greenInput.addEventListener("input", changeColor);
+blueInput.addEventListener("input", changeColor);
+
+</script>
+
+</body>
+</html>

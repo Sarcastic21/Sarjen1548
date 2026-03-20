@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Calculator</title>
+
+    <script>
+
+        function doCalc(formRef, type) {
+
+            var first = Number(formRef.firstNum.value);
+            var second = Number(formRef.secondNum.value);
+            var ans = "";
+
+        if (isNaN(first) || isNaN(second)) {
+                ans = "Enter valid numbers";
+            }
+        else {
+
+            if (!type) {
+                    type = formRef.choice.value;
+             }
+
+             if (type == "plus") {
+                    ans = first + second;
+             }
+              else if (type == "minus") {
+                    ans = first - second;
+                }
+             else if (type == "mul") {
+                    ans = first * second;
+               }
+               else if (type == "div") {
+                  if (second == 0) {
+                        ans = "Not possible";
+                    } else {
+                        ans = first / second;
+                    }
+                }
+            }
+
+            formRef.output.value = ans;
+        }
+
+    </script>
+</head>
+
+<body>
+
+<h2>Calculator Using Select Option</h2>
+
+<form>
+
+    Enter First Number:
+
+    <input type="text" name="firstNum"><br><br>
+
+     Enter Second Number:
+    <input type="text" name="secondNum"><br><br>
+
+    Select Operation:
+    <select name="choice">
+        <option value="plus">Addition</option>
+        <option value="minus">Subtraction</option>
+        <option value="mul">Multiplication</option>
+        <option value="div">Division</option>
+    </select><br><br>
+
+     <input type="button" value="Get Answer" onclick="doCalc(this.form)"><br><br>
+
+Answer:
+    <input type="text" name="output" readonly>
+
+</form>
+
+<br><br><hr><br>
+
+<h2>Calculator Using Separate Buttons</h2>
+
+<form>
+
+    Enter First Number:
+    <input type="text" name="firstNum"><br><br>
+
+    Enter Second Number:
+    <input type="text" name="secondNum"><br><br>
+
+    <input type="button" value="+" onclick="doCalc(this.form,'plus')">
+
+    <input type="button" value="-" onclick="doCalc(this.form,'minus')">
+
+
+    <input type="button" value="*" onclick="doCalc(this.form,'mul')">
+    <input type="button" value="/" onclick="doCalc(this.form,'div')"><br><br>
+
+    Answer:
+    <input type="text" name="output" readonly>
+
+</form>
+
+</body>
+</html>

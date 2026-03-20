@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Task Manager</h2>
+
+<input id="inputBox" placeholder="Add new task">
+<button id="mainBtn" onclick="handleTask()">Add Task</button>
+
+<ul id="taskList"></ul>
+
+<script>
+
+let dataList = JSON.parse(localStorage.getItem("myTasks")) || [];
+let currentEdit = -1;
+
+let inputRef = document.getElementById("inputBox");
+let btnRef = document.getElementById("mainBtn");
+let listRef = document.getElementById("taskList");
+
+function renderList(){
+
+  listRef.innerHTML = "";
+
+  dataList.forEach(function(item, i){
+
+    let li = document.createElement("li");
+    li.innerHTML = item + " ";
+
+    let editBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit";
+    editBtn.onclick = function(){
+      startEdit(i);
+    };
+
+    let removeBtn = document.createElement("button");
+    removeBtn.innerHTML = "Remove";
+    removeBtn.onclick = function(){
+      removeTask(i);
+    };
+
+    li.appendChild(editBtn);
+    li.appendChild(removeBtn);
+
+    listRef.appendChild(li);
+  });
+
+  localStorage.setItem("myTasks", JSON.stringify(dataList));
+}
+
+function handleTask(){
+
+  let text = inputRef.value;
+
+  if(text.trim() === "") return;
+
+  if(currentEdit === -1){
+    dataList.push(text);
+  } else {
+    dataList[currentEdit] = text;
+    currentEdit = -1;
+    btnRef.innerHTML = "Add Task";
+  }
+
+  inputRef.value = "";
+  renderList();
+}
+
+function startEdit(i){
+
+  inputRef.value = dataList[i];
+  currentEdit = i;
+
+  btnRef.innerHTML = "Update Task";
+}
+
+function removeTask(i){
+
+  dataList.splice(i, 1);
+  renderList();
+}
+
+renderList();
+
+</script>
+
+</body>
+</html>

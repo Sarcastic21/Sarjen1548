@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Todo List</title>
+</head>
+<body>
+
+<h2>Todo List</h2>
+
+<input type="text" id="taskInput" placeholder="Enter task">
+<button onclick="addTask()">Add</button>
+
+<ul id="taskList"></ul>
+
+<script>
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function showTasks(){
+    let list = document.getElementById("taskList");
+    list.innerHTML = "";
+
+    for(let i = 0; i < tasks.length; i++){
+
+        let li = document.createElement("li");
+        li.innerText = tasks[i] + " ";
+
+        let editBtn = document.createElement("button");
+        editBtn.innerText = "Edit";
+        editBtn.onclick = function(){
+            editTask(i);
+        };
+
+        let delBtn = document.createElement("button");
+        delBtn.innerText = "Delete";
+        delBtn.onclick = function(){
+            deleteTask(i);
+        };
+
+        li.appendChild(editBtn);
+        li.appendChild(delBtn);
+
+        list.appendChild(li);
+    }
+}
+
+function addTask(){
+    let input = document.getElementById("taskInput");
+    let task = input.value;
+
+    if(task != ""){
+        tasks.push(task);
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        input.value = "";
+        showTasks();
+    }
+}
+
+function deleteTask(index){
+    tasks.splice(index,1);
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+    showTasks();
+}
+
+function editTask(index){
+    let newTask = prompt("Edit task", tasks[index]);
+
+    if(newTask != null){
+        tasks[index] = newTask;
+        localStorage.setItem("tasks", JSON.stringify(tasks));
+        showTasks();
+    }
+}
+
+showTasks();
+
+</script>
+
+</body>
+</html>

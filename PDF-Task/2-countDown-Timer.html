@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Step Timer</title>
+</head>
+
+<body>
+
+<h2>Timer (0 → 10)</h2>
+
+<p id="output">0</p>
+
+<button onclick="beginTimer()">Start</button>
+<button onclick="holdTimer()">Pause</button>
+<button onclick="resetTimer()">Reset</button>
+
+<script>
+
+let current = 0;
+let timerRef = null;
+
+function updateUI(){
+  document.getElementById("output").innerHTML = current;
+}
+
+function beginTimer(){
+
+  if(timerRef !== null) return;
+
+  timerRef = setInterval(function(){
+
+    current = current + 1;
+    updateUI();
+
+    if(current >= 10){
+      clearInterval(timerRef);
+      timerRef = null;
+    }
+
+  }, 1000);
+
+}
+
+function holdTimer(){
+  if(timerRef !== null){
+    clearInterval(timerRef);
+    timerRef = null;
+  }
+}
+
+function resetTimer(){
+  clearInterval(timerRef);
+  timerRef = null;
+
+  current = 0;
+  updateUI();
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Basic Calculator</title>
+
+  <script>
+
+    function performCalc(formRef, type){
+
+      let val1 = parseFloat(formRef.first.value);
+      let val2 = parseFloat(formRef.second.value);
+      let ans = "";
+
+      // if operation not passed (dropdown case)
+      if(!type){
+        type = formRef.actionType.value;
+      }
+
+      switch(type){
+
+        case "plus":
+          ans = val1 + val2;
+          break;
+
+        case "minus":
+          ans = val1 - val2;
+          break;
+
+        case "times":
+          ans = val1 * val2;
+          break;
+
+        case "divide":
+          if(val2 === 0){
+            ans = "Not allowed";
+          } else {
+            ans = val1 / val2;
+          }
+          break;
+
+        default:
+          ans = "Invalid";
+      }
+
+      formRef.output.value = ans;
+    }
+
+  </script>
+
+</head>
+
+<body>
+
+<h2>Calculator (Using Dropdown)</h2>
+
+<form name="formA">
+
+  First Number:
+  <input type="text" name="first"><br><br>
+
+  Second Number:
+  <input type="text" name="second"><br><br>
+
+  Choose Operation:
+  <select name="actionType">
+    <option value="plus">Add</option>
+    <option value="minus">Subtract</option>
+    <option value="times">Multiply</option>
+    <option value="divide">Divide</option>
+  </select><br><br>
+
+  <input type="button" value="Calculate" onclick="performCalc(this.form)"><br><br>
+
+  Result:
+  <input type="text" name="output" readonly>
+
+</form>
+
+<br><br>
+
+<h2>Calculator (Using Buttons)</h2>
+
+<form name="formB">
+
+  First Number:
+  <input type="text" name="first"><br><br>
+
+  Second Number:
+  <input type="text" name="second"><br><br>
+
+  <input type="button" value="Add" onclick="performCalc(this.form, 'plus')">
+  <input type="button" value="Subtract" onclick="performCalc(this.form, 'minus')">
+  <input type="button" value="Multiply" onclick="performCalc(this.form, 'times')">
+  <input type="button" value="Divide" onclick="performCalc(this.form, 'divide')"><br><br>
+
+  Result:
+  <input type="text" name="output" readonly>
+
+</form>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Registration Form</h2>
+
+Full Name :
+<input id="fullName"><br><br>
+
+Phone :
+<input id="phone"><br><br>
+
+Gender :
+<input type="radio" name="gen" value="Male"> Male
+<input type="radio" name="gen" value="Female"> Female
+<br><br>
+
+Interests :
+<input type="checkbox" name="interest" value="Reading"> Reading
+<input type="checkbox" name="interest" value="Gaming"> Gaming
+<input type="checkbox" name="interest" value="Travel"> Travel
+<br><br>
+
+Location :
+<select id="location">
+<option value="">Choose City</option>
+<option>Ahmedabad</option>
+<option>Surat</option>
+<option>Rajkot</option>
+<option>Vadodara</option>
+</select>
+
+<br><br>
+
+<button onclick="processForm()">Submit</button>
+
+<h3>Details</h3>
+<div id="resultBox"></div>
+
+<script>
+
+function processForm(){
+
+  let nameVal = document.getElementById("fullName").value;
+  let phoneVal = document.getElementById("phone").value;
+  let cityVal = document.getElementById("location").value;
+
+  let namePattern = /^[A-Za-z ]+$/;
+  if(nameVal === "" || !namePattern.test(nameVal)){
+    alert("Invalid name");
+    return;
+  }
+
+  let phonePattern = /^[0-9]{10}$/;
+  if(!phonePattern.test(phoneVal)){
+    alert("Invalid mobile number");
+    return;
+  }
+
+  let genderNodes = document.querySelectorAll("input[name='gen']");
+  let selectedGender = "";
+
+  genderNodes.forEach(function(item){
+    if(item.checked){
+      selectedGender = item.value;
+    }
+  });
+
+  if(selectedGender === ""){
+    alert("Please select gender");
+    return;
+  }
+
+  let hobbyNodes = document.querySelectorAll("input[name='interest']");
+  let selectedHobbies = [];
+
+  hobbyNodes.forEach(function(item){
+    if(item.checked){
+      selectedHobbies.push(item.value);
+    }
+  });
+
+  if(selectedHobbies.length === 0){
+    alert("Select at least one interest");
+    return;
+  }
+
+  if(cityVal === ""){
+    alert("Choose city");
+    return;
+  }
+
+  document.getElementById("resultBox").innerHTML =
+    "Name: " + nameVal + "<br>" +
+    "Phone: " + phoneVal + "<br>" +
+    "Gender: " + selectedGender + "<br>" +
+    "Interests: " + selectedHobbies.join(", ") + "<br>" +
+    "City: " + cityVal;
+
+}
+
+</script>
+
+</body>
+</html>

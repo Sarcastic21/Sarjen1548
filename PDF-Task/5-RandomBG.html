@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Background Changer</title>
+</head>
+
+<body>
+
+<h2>Auto Background Color Change</h2>
+
+<script>
+
+function generateColor(){
+
+  let red = Math.floor(Math.random() * 256);
+  let green = Math.floor(Math.random() * 256);
+  let blue = Math.floor(Math.random() * 256);
+
+  let colorValue = "rgb(" + red + "," + green + "," + blue + ")";
+
+  document.body.style.backgroundColor = colorValue;
+}
+
+window.addEventListener("load", function(){
+  generateColor();
+});
+
+</script>
+
+</body>
+</html>

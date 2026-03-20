@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product List</title>
+
+    <style>
+        body{
+            font-family: Arial;
+        }
+
+        .main{
+            display:flex;
+            flex-wrap:wrap;
+            gap:20px;
+        }
+
+        .card{
+            width:200px;
+            border:1px solid black;
+            padding:10px;
+            text-align:center;
+        }
+
+        .card img{
+            width:100%;
+            height:150px;
+            object-fit:contain;
+        }
+    </style>
+</head>
+
+<body>
+
+<h2>Mobile Products</h2>
+
+<div class="main" id="productBox"></div>
+
+<script>
+
+    let products = [
+
+        { name:"iPhone 15", price:72000, image:"iphone.jpg" },
+
+        { name:"Samsung S23", price:68000, image:"samsung.jpg" },
+
+        { name:"Vivo X90", price:35000, image:"Vivo.jpg" },
+
+        { name:"OnePlus 11", price:52000, image:"Oneplus.jpg" },
+
+        { name:"OnePlus 11", price:52000, image:"Oneplus.jpg" } 
+
+    ];
+
+    let box = document.getElementById("productBox");
+
+    for(let i = 0; i < products.length; i++){
+
+        box.innerHTML +=
+        "<div class='card'>" +
+        "<img src='"+ products[i].image +"'>" +
+        "<h4>"+ products[i].name +"</h4>" +
+        "<p>Price : ₹"+ products[i].price +"</p>" +
+        "</div>";
+
+    }
+
+</script>
+
+</body>
+</html>

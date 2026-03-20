@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OTP Creator</title>
+</head>
+
+<body>
+
+<h2>Generate 4 Digit Code</h2>
+
+<p id="showOtp"></p>
+
+<button onclick="createOtp()">Get OTP</button>
+
+<script>
+
+function createOtp(){
+
+  let randomNum = Math.random() * 9000;
+  let finalOtp = Math.floor(randomNum) + 1000;
+
+  document.getElementById("showOtp").innerHTML = finalOtp;
+}
+
+window.addEventListener("load", function(){
+  createOtp();
+});
+
+</script>
+
+</body>
+</html>

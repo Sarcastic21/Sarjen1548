@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CRUD with LocalStorage</title>
+</head>
+<body>
+
+<h2>Student Form</h2>
+
+Name:
+<input type="text" id="name"><br><br>
+
+Gender:
+<input type="radio" name="gender" value="Male">Male
+<input type="radio" name="gender" value="Female">Female
+<br><br>
+
+Course:
+<select id="course">
+<option value="BCA">BCA</option>
+<option value="BBA">BBA</option>
+<option value="MCA">MCA</option>
+</select>
+
+<br><br>
+
+<button onclick="addData()">Add</button>
+<button onclick="updateData()">Update</button>
+
+<hr>
+
+<h3>Student List</h3>
+
+<table border="1">
+<thead>
+<tr>
+<th>Name</th>
+<th>Gender</th>
+<th>Course</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="tableBody"></tbody>
+
+</table>
+
+<script>
+
+let students = JSON.parse(localStorage.getItem("students")) || [];
+let editIndex = -1;
+
+displayData();
+
+function addData(){
+
+let name = document.getElementById("name").value;
+let gender = document.querySelector('input[name="gender"]:checked').value;
+let course = document.getElementById("course").value;
+
+let obj = {
+name:name,
+gender:gender,
+course:course
+};
+
+students.push(obj);
+
+localStorage.setItem("students", JSON.stringify(students));
+
+displayData();
+clearForm();
+
+}
+
+function displayData(){
+
+let table = document.getElementById("tableBody");
+
+table.innerHTML = "";
+
+for(let i=0;i<students.length;i++){
+
+table.innerHTML += "<tr>"+
+"<td>"+students[i].name+"</td>"+
+"<td>"+students[i].gender+"</td>"+
+"<td>"+students[i].course+"</td>"+
+"<td>"+
+"<button onclick='editData("+i+")'>Edit</button>"+
+"<button onclick='deleteData("+i+")'>Delete</button>"+
+"</td>"+
+"</tr>";
+
+}
+
+}
+
+function deleteData(index){
+
+students.splice(index,1);
+
+localStorage.setItem("students", JSON.stringify(students));
+
+displayData();
+
+}
+
+function editData(index){
+
+editIndex = index;
+
+document.getElementById("name").value = students[index].name;
+
+let genders = document.getElementsByName("gender");
+
+for(let i=0;i<genders.length;i++){
+
+if(genders[i].value == students[index].gender){
+genders[i].checked = true;
+}
+
+}
+
+document.getElementById("course").value = students[index].course;
+
+}
+
+function updateData(){
+
+students[editIndex].name = document.getElementById("name").value;
+
+students[editIndex].gender = document.querySelector('input[name="gender"]:checked').value;
+
+students[editIndex].course = document.getElementById("course").value;
+
+localStorage.setItem("students", JSON.stringify(students));
+
+displayData();
+clearForm();
+
+}
+
+function clearForm(){
+
+document.getElementById("name").value = "";
+
+let genders = document.getElementsByName("gender");
+
+for(let i=0;i<genders.length;i++){
+genders[i].checked = false;
+}
+
+document.getElementById("course").value = "BCA";
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Counter</title>
+</head>
+
+<body>
+
+<h2>Counter using Local Storage</h2>
+
+<h1 id="count">0</h1>
+
+<button onclick="increase()">Increment</button>
+<button onclick="decrease()">Decrement</button>
+
+<script>
+
+let counter = localStorage.getItem("counter");
+
+if(counter == null){
+    counter = 0;
+}
+
+document.getElementById("count").innerText = counter;
+
+function increase(){
+    counter++;
+    localStorage.setItem("counter", counter);
+    document.getElementById("count").innerText = counter;
+}
+
+function decrease(){
+    counter--;
+    localStorage.setItem("counter", counter);
+    document.getElementById("count").innerText = counter;
+}
+
+</script>
+
+</body>
+</html>

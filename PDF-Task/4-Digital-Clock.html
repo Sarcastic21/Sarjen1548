@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Live Time Display</title>
+</head>
+
+<body>
+
+<h2 id="timeBox"></h2>
+
+<script>
+
+function showTime(){
+
+  let currentTime = new Date();
+
+  let formatted = currentTime.toLocaleString();
+
+  document.getElementById("timeBox").innerHTML = formatted;
+}
+
+setInterval(function(){
+  showTime();
+}, 1000);
+
+showTime();
+
+</script>
+
+</body>
+</html>

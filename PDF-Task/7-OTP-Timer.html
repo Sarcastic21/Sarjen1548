@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OTP Resend Timer</title>
+</head>
+
+<body>
+
+<button id="sendBtn" onclick="handleOtp()">Get OTP</button>
+
+<script>
+
+let counter = 30;
+let timerId = null;
+
+let buttonRef = document.getElementById("sendBtn");
+
+function handleOtp(){
+
+  buttonRef.disabled = true;
+  counter = 30;
+
+  timerId = setInterval(function(){
+
+    let seconds = counter < 10 ? "0" + counter : counter;
+
+    buttonRef.innerHTML = "Wait : 00:" + seconds;
+
+    counter--;
+
+    if(counter < 0){
+      clearInterval(timerId);
+      timerId = null;
+
+      buttonRef.innerHTML = "Send Again";
+      buttonRef.disabled = false;
+    }
+
+  }, 1000);
+
+}
+
+</script>
+
+</body>
+</html>

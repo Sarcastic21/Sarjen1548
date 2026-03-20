@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Counter</title>
+</head>
+
+<body>
+
+<h2>Value Counter (0 to 10)</h2>
+
+<p id="display"></p>
+
+<button onclick="increaseValue()">Add</button>
+<button onclick="decreaseValue()">Minus</button>
+
+<script>
+
+let value = localStorage.getItem("myCount")
+
+if(value === null){
+  value = 0
+}
+
+value = parseInt(value)
+
+document.getElementById("display").innerHTML = value
+
+function increaseValue(){
+
+  if(value < 10){
+    value = value + 1
+    document.getElementById("display").innerHTML = value
+    localStorage.setItem("myCount", value)
+  }
+
+}
+
+function decreaseValue(){
+
+  if(value > 0){
+    value = value - 1
+    document.getElementById("display").innerHTML = value
+    localStorage.setItem("myCount", value)
+  }
+
+}
+
+</script>
+
+</body>
+</html>
